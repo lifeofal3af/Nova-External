@@ -1,16 +1,23 @@
-# appveyor.yml
-version: 1.0.[{build.build_id}]
-platform:
-  - x64
+version: 1.0.{build}
+
+image: Visual Studio 2022
+
 configuration:
+  - Debug
   - Release
+
+platform:
+  - x86
+  - x64
+
+before_build:
+  - nuget restore
+
 build:
-  project: NovaHack.vcxproj
+  project: NovaHack.sln
+  parallel: true
   verbosity: minimal
-  msbuild_args: /p:Configuration=Release /p:Platform=x64
+
 artifacts:
-  - path: NovaHack\NovaHack.exe
-    name: NovaHack
-  - path: NovaHack\NovaHack.pdb
-    name: NovaHack PDBs
-    
+  - path: '**\*.exe'
+    name: Executable
