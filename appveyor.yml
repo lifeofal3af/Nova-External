@@ -1,0 +1,16 @@
+# appveyor.yml
+version: 1.0.[{build.build_id}]
+platform:
+  - x64
+configuration:
+  - Release
+build:
+  project: NovaHack.vcxproj
+  verbosity: minimal
+  msbuild_args: /p:Configuration=Release /p:Platform=x64
+artifacts:
+  - path: NovaHack\NovaHack.exe
+    name: NovaHack
+  - path: NovaHack\NovaHack.pdb
+    name: NovaHack PDBs
+    
